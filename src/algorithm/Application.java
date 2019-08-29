@@ -2,7 +2,7 @@ package algorithm;
 
 import java.util.Arrays;
 
-import algorithm.sort.MergeSort;
+import algorithm.sort.InsertionSort;
 
 public class Application {
 
@@ -10,12 +10,15 @@ public class Application {
 
 		int[] messyArray = {4,7,1,3,8,2,6,2,9};
 
-		Sortable algorithm = new MergeSort();
+//		Sortable algorithm = new MergeSort();
+//		Sortable algorithm = new BubbleSort();
+//		Sortable algorithm = new SelectionSort();
+		Sortable algorithm = new InsertionSort();
 
-		System.out.println("É\Å[ÉgëOÅF" + Arrays.toString(messyArray));
+System.out.println("„ÇΩ„Éº„ÉàÂâç" + Arrays.toString(messyArray));
 
 		algorithm.sort(messyArray);
 
-		System.out.println("É\Å[Égå„ÅF" + Arrays.toString(messyArray));
+		System.out.println("„ÇΩ„Éº„ÉàÂæå" + Arrays.toString(messyArray));
 	}
 }
