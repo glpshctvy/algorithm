@@ -6,8 +6,6 @@ public class MergeSort implements Sortable {
 
 	@Override
 	public void sort(int[] messyArray) {
-//	System.out.println(Arrays.toString(messyArray));
-	
 		if (messyArray.length == 1) {
 			return;
 		}
@@ -27,31 +25,33 @@ public class MergeSort implements Sortable {
 		sort(frontArray);
 		sort(backArray);
 
-		int frontArrayCount = 0;
-		int backArrayCount = 0;
-		for (int i = 0; i < frontArray.length + backArray.length; i++) {
-			if (frontArrayCount == frontArray.length) {
-				messyArray[i] = backArray[backArrayCount];
-				backArrayCount++;
+		int frontCount = 0;
+		int backCount = 0;
+
+		while (frontCount < frontArray.length || backCount < backArray.length) {
+			int targetIndex = frontCount + backCount;
+
+			if (frontCount == frontArray.length) {
+				messyArray[targetIndex] = backArray[backCount];
+				backCount++;
 				continue;
 			}
 
-			if (backArrayCount == frontArray.length) {
-				messyArray[i] = frontArray[frontArrayCount];
-				frontArrayCount++;
+			if (backCount == backArray.length) {
+				messyArray[targetIndex] = frontArray[frontCount];
+				frontCount++;
 				continue;
 			}
 
-			if (frontArray[frontArrayCount] < backArray[backArrayCount]) {
-				messyArray[i] = frontArray[frontArrayCount];
-				frontArrayCount++;
+			if (frontArray[frontCount] < backArray[backCount]) {
+				messyArray[targetIndex] = frontArray[frontCount];
+				frontCount++;
 			} else {
-				messyArray[i] = backArray[backArrayCount];
-				backArrayCount++;
+				messyArray[targetIndex] = backArray[backCount];
+				backCount++;
 			}
 		}
-//		System.out.println(Arrays.toString(messyArray));
-		
+
 	}
 
 	public void sort2(int[] messyArray) {

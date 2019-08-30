@@ -6,8 +6,44 @@ public class QuickSort implements Sortable {
 
 	@Override
 	public void sort(int[] messyArray) {
-		// TODO 自動生成されたメソッド・スタブ
-		
+		int start = 0;
+		int end = messyArray.length - 1;
+
+		sort(messyArray, start, end);
+	}
+
+	private void sort(int[] messyArray, int start, int end) {
+		if (end - start == 0) {
+			return;
+		}
+
+		int leftCounter = start;
+		int rightCounter = end - 1;
+		int pivot = messyArray[end];
+		while (leftCounter != rightCounter) {
+			if (messyArray[leftCounter] <= pivot) {
+				leftCounter++;
+				continue;
+			}
+			if (messyArray[rightCounter] > pivot) {
+				rightCounter--;
+				continue;
+			}
+			swap(messyArray, leftCounter, rightCounter);
+		}
+
+		// 繧ｫ繧ｦ繝ｳ繧ｿ縺後∪縺倥ｊ縺ゅ▲縺溽ｮ�謇縺ｨpivot繧貞�･繧梧崛縺医ｋ
+		if (messyArray[leftCounter] > pivot) {
+			swap(messyArray, leftCounter, end);
+		}
+		sort(messyArray, start, leftCounter);
+		sort(messyArray, leftCounter + 1, end);
+	}
+
+	private void swap(int[] messyArray, int target1, int target2) {
+		int temp = messyArray[target1];
+		messyArray[target1] = messyArray[target2];
+		messyArray[target2] = temp;
 	}
 
 }
