@@ -1,7 +1,5 @@
 package algorithm.sort;
 
-import algorithm.Sortable;
-
 public class QuickSort implements Sortable {
 
 	@Override

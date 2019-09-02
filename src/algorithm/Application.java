@@ -1,35 +1,24 @@
 package algorithm;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
-import algorithm.sort.BubbleSort;
-import algorithm.sort.HeapSort;
-import algorithm.sort.InsertionSort;
-import algorithm.sort.MergeSort;
-import algorithm.sort.QuickSort;
-import algorithm.sort.SelectionSort;
+import algorithm.sort.Sortable;
 
 public class Application {
 
-	public static void main(String[] args) {
-		int arraySize = 9;
-		Random random = new Random();
+	public static void main(String[] args) throws IOException {
 
-		int[] messyArray = new int[arraySize];
-		for (int i = 0; i < arraySize; i++) {
-			messyArray[i] = random.nextInt(20);
-		}
-		System.out.println(Arrays.toString(messyArray));
-		List<Sortable> algorithms = Arrays.asList(new BubbleSort()
-																			, new SelectionSort()
-																			, new InsertionSort()
-																			, new MergeSort()
-																			, new QuickSort()
-																			, new HeapSort()
-																			);
+		int[] messyArray = ArrayFactory.createArray(ArrayType.RANDOM, 10);
+
+		System.out.println("ソート前の配列：" + Arrays.toString(messyArray));
+//		File file = new File("ソート実施結果.txt");
+//		FileWriter writer = new FileWriter(file);
+////		writer.write("ソート前の配列：" + Arrays.toString(messyArray) +"\r\n");
+
+		List<Sortable> algorithms = Arrays.asList(SortFactory.createSortOfAll());
 
 		for (Sortable algorithm : algorithms) {
 			int[] array = messyArray.clone();
@@ -38,7 +27,10 @@ public class Application {
 			algorithm.sort(array);
 			long end = System.currentTimeMillis();
 
-			System.out.println(algorithm.getClass().getSimpleName() + " , 処理時間：" + Duration.ofMillis(end - start));
+			System.out.println(algorithm.getClass().getSimpleName() + " ,処理結果：" + Duration.ofMillis(end - start) + ",\t\t\t ソート結果：" + Arrays.toString(array));
+//			writer.write(algorithm.getClass().getSimpleName() + " ,処理結果：" + Duration.ofMillis(end - start) + ",\t\t ソート結果：" + Arrays.toString(array) +"\r\n");
+//			writer.write(algorithm.getClass().getSimpleName() + " ,処理結果：" + Duration.ofMillis(end - start) + "\r\n");
 		}
+//		writer.close();
 	}
 }
